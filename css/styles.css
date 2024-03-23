@@ -1,0 +1,313 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+:root{
+    --primary : #f45dd1;
+    --secundary : #FFCBDB;
+    --tertiary : #40E0D0;
+    --quaternary : #8141AF;
+    --quinary : #E32636;
+    --black : #000000;
+    --white : #ffffff; 
+}
+
+body{
+    background-color: var(--white);
+    max-width: 1200px;
+    height: 100%;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+/** header section **/
+
+header{
+    width: 100%;
+    height: 100dvh;
+    background-color: var(--primary);
+    animation: fixear linear both;
+    animation-timeline:scroll(root y);
+    animation-range: 0 100dvh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+#portada{
+
+    width: 100%;
+    height: 100dvh;
+    animation: navbar linear both;
+    animation-timeline: scroll(root y);
+    animation-range: 0 100dvh;
+
+    & .img-portada{
+        width: 100%;
+        height: 80%;
+        background-image: url('../src/camila-portada.png');
+        background-size: cover;
+        grid-area: portada;
+        animation: portada-navbar linear both;
+        animation-timeline: scroll(root y);
+        animation-range: 0 100dvh;
+    }
+
+    & .img-navbar{
+        animation: logo-deploy linear both;
+        animation-timeline: scroll(root y);
+        animation-range: 0 100dvh;
+
+        & img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    & .social-medias{
+        width: 100%;
+        height: 20%;
+        display: grid;
+        grid-area: social-medias;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "follow buttons";
+        justify-items: center;
+        align-items: center;
+        animation: height-deploy  linear both;
+        animation-timeline: scroll(root y);
+        animation-range: 0 100dvh;
+
+        & span{
+            grid-area: follow;
+            font-weight: 900;
+            font-size: 1em;
+        }
+
+        & ul{
+            width: 100%;
+            height: 80%;
+            grid-area: buttons;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            list-style: none;
+            & li{
+                width: 20%;
+                min-width: 50px;
+                height: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                & a{
+                    width: 50%;
+                    height: 100%;
+                    & img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: fill;
+                        animation: scale ease-out 5s infinite;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes fixear{
+    to{
+        height: 20dvh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: "navbar";
+    }
+}
+
+@keyframes portada-navbar{
+    90%{
+        display: none;
+    }
+    100%{
+        background-image:none ;
+        display: none;
+    }
+}
+
+@keyframes navbar {
+    to{
+        display: grid;
+        grid-area: navbar;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: "logo social-medias social-medias";
+        background-color: var(--secundary);
+        height: 20dvh;
+    }
+}
+
+@keyframes logo-deploy{
+    0%{
+        display: none;
+    }
+    90%{
+        display: none;
+    }
+    100%{
+        display: flex;
+        grid-area: logo;
+        height: 20dvh;
+        width: 100%;
+        justify-content: start;
+        align-items: center;
+    }
+}
+
+@keyframes height-deploy{
+    to{
+        height: 20dvh;
+    }
+}
+
+@keyframes scale {
+    0%{
+        scale: .8;
+    }
+    50%{
+        scale: 1;
+    }
+    100%{
+        scale: .8;
+    }
+}
+
+/** main section **/
+
+main{
+    width: 100%;
+    background-color: var(--white);
+    padding-top: 130dvh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.card .card-content .card-content-button{
+    display: none;
+}
+.card:nth-child(even){
+    width: 90%;
+    height: 60dvh;
+    margin-inline:auto ;
+    background-color: var(--white);
+
+    & .card-title{
+        width: 100%;
+        height: 20%;
+        text-align: center;
+        color: var(--quinary);
+    }
+
+    & .card-content{
+        width: 100%;
+        height: 80%;
+        
+        & .card-content-images{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+
+            & img{
+                flex-basis: 60%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            & .card-content-images-cols{
+                flex-basis: 40%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                & img{
+                    height: 50%;
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+}
+
+.card:nth-child(odd){
+    width: 90%;
+    height: 60dvh;
+    margin-inline:auto ;
+    background-color: var(--white);
+
+    & .card-title{
+        width: 100%;
+        height: 20%;
+        text-align: center;
+        color: var(--quaternary);
+    }
+
+    & .card-content{
+        width: 100%;
+        height: 80%;
+        
+        & .card-content-images{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+            flex-direction: row-reverse;
+
+            & img{
+                flex-basis: 60%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            & .card-content-images-cols{
+                flex-basis: 40%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                & img{
+                    height: 50%;
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+}
+
+/**footer section**/
+
+footer{
+    width: 100%;
+    background-color: var(--white);
+    margin-top: 10dvh;
+    display: flex;
+    column-gap: 20px;
+}
+
+.ubication{
+    width: 90%;
+    padding: 1rem;
+    flex-basis:100%;
+    display:  flex;
+    background-color: var(--quinary);
+    justify-content: space-around;
+    border-radius: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    & iframe{
+        flex-basis: 50%;
+        border-radius: 10px;
+    }
+}
