@@ -16,99 +16,132 @@
 
 body{
     background-color: var(--white);
-    max-width: 1200px;
-    height: 100%;
-    margin-inline: auto;
-    padding-inline: 1rem;
+    width: 100%;
 }
 /** header section **/
 
-header{
+.container{
+    position: relative;
+    max-width: 1200px;
     width: 100%;
-    height: 100dvh;
     background-color: var(--primary);
-    animation: fixear linear both;
-    animation-timeline:scroll(root y);
-    animation-range: 0 100dvh;
-    position: fixed;
-    left: 0;
-    top: 0;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(3,auto);
+    row-gap: 10dvh;
+    overflow: hidden;
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer"
+    ;
 }
-#portada{
 
+.container > header{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100dvh;
-    animation: navbar linear both;
+    grid-area: header;
+    animation: fixear ease-out both;
     animation-timeline: scroll(root y);
     animation-range: 0 100dvh;
 
-    & .img-portada{
+    & #portada{
         width: 100%;
-        height: 80%;
-        background-image: url('../src/camila-portada.png');
-        background-size: cover;
-        grid-area: portada;
-        animation: portada-navbar linear both;
-        animation-timeline: scroll(root y);
-        animation-range: 0 100dvh;
-    }
-
-    & .img-navbar{
-        animation: logo-deploy linear both;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 90% 10%;
+        grid-template-areas: 
+            "imagen-portada"
+            "social-medias"
+        ;
+        animation: navbar ease-out both;
         animation-timeline: scroll(root y);
         animation-range: 0 100dvh;
 
-        & img{
+        & .img-portada{
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            grid-area: imagen-portada;
+            animation: cant-see ease-out both;
+            animation-timeline: scroll(root y);
+            animation-range: 0 100dvh;
+
+            & img{
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+            }
         }
-    }
-
-    & .social-medias{
-        width: 100%;
-        height: 20%;
-        display: grid;
-        grid-area: social-medias;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "follow buttons";
-        justify-items: center;
-        align-items: center;
-        animation: height-deploy  linear both;
-        animation-timeline: scroll(root y);
-        animation-range: 0 100dvh;
-
-        & span{
-            grid-area: follow;
-            font-weight: 900;
-            font-size: 1em;
-        }
-
-        & ul{
+        
+        & .img-navbar{
             width: 100%;
-            height: 80%;
-            grid-area: buttons;
-            overflow: hidden;
+            height: 100%;
+            background-color: var(--primary);
+            animation: can-see ease-out both;
+            animation-timeline: scroll(root y);
+            animation-range: 0 100dvh;
+            opacity: 0;
+            & img{
+                width: 100%;
+                height: 100%;
+                object-fit: fil;
+            }
+        }
+
+        & .social-medias{
+            grid-area: social-medias;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary);    
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
-            list-style: none;
-            & li{
-                width: 20%;
-                min-width: 50px;
-                height: 50%;
+            overflow: hidden;
+            & span{
+                width: 50%;
+                height: 100%;
+                justify-content: center;
+                font-size: 1rem;
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                & a{
-                    width: 50%;
+            }
+
+            & ul{
+                display: flex;
+                width: 50%;
+                height: 100%;
+                justify-content: space-around;
+                align-items: center;
+                column-gap: 1%;
+                list-style: none;
+
+                & li{
                     height: 100%;
-                    & img{
+                    width: 20%;
+                    display: flex;
+                    align-items: center;
+
+                    & a{
                         width: 100%;
                         height: 100%;
-                        object-fit: fill;
-                        animation: scale ease-out 5s infinite;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 100%;
+
+                        & img{
+                            width: 90%;
+                            height: 90%;
+                            object-fit: fill;
+                            box-shadow: 3px 1px 3px var(--white);
+                            border-radius: 100%;
+                            animation: scale-img ease-out 5s infinite;
+                        }
                     }
                 }
             }
@@ -116,61 +149,168 @@ header{
     }
 }
 
+/*main section*/
 
-@keyframes fixear{
-    to{
-        height: 20dvh;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-areas: "navbar";
+.container > main{
+    width: 100%;
+    grid-area: main;
+    background-color: var(--white);
+    padding: 110dvh 2rem 2rem 2rem; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr));
+    grid-auto-rows: minmax(300px,100dvh);
+    gap: 20px; 
+    box-sizing: border-box;
+    
+}
+
+.card:nth-child(even){
+
+    & .card-title{
+        color: var(--quinary);
+        text-align: center;
+        height: 10%;
+    }
+
+    & .card-content{
+        & .card-content-images{
+            flex-direction: row-reverse;
+            
+            & img{
+                border-radius: 0 20px 20px 0;
+            }
+
+            & .card-content-images-cols{
+                & img:nth-child(1){
+                    border-radius: 20px 0 0 0;
+                }
+
+                & img:nth-child(2){
+                    border-radius: 0 0 0 20px;
+                }
+            }
+        }
     }
 }
 
-@keyframes portada-navbar{
-    90%{
-        display: none;
-    }
-    100%{
-        background-image:none ;
-        display: none;
-    }
-}
+.card{
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 1rem;
+    box-sizing: border-box;
 
-@keyframes navbar {
-    to{
-        display: grid;
-        grid-area: navbar;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-areas: "logo social-medias social-medias";
-        background-color: var(--secundary);
-        height: 20dvh;
+    & .card-title{
+        color: var(--quaternary);
+        text-align: center;
+        height: 10%;
     }
-}
-
-@keyframes logo-deploy{
-    0%{
-        display: none;
-    }
-    90%{
-        display: none;
-    }
-    100%{
-        display: flex;
-        grid-area: logo;
-        height: 20dvh;
+    
+    & .card-content{
         width: 100%;
-        justify-content: start;
-        align-items: center;
+        height: 90%;
+        position: relative;
+        
+        & .card-content-images{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            border-radius: 20px;
+            border: 2px solid var(--black);
+
+            & img{
+                border-radius: 20px 0 0 20px;
+                width: 50%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            
+            & .card-content-images-cols{
+                width: 50%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                & img{
+                    width: 100%;
+                    height: 50%;
+                }
+
+                & img:nth-child(1){
+                    border-radius: 0px 20px 0 0;
+                }
+
+                & img:nth-child(2){
+                    border-radius: 0px 0 20px 0;
+                }
+            }
+        }
+        
+        & .card-content-button{
+            display:flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto auto;
+            width: 25%;
+            height: 25%;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white);
+            font-size: 100%;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: 900;
+            text-shadow: 1px 1px 1px var(--black);
+            color: var(--primary);
+            border: 2px dashed var(--quaternary);
+        }
     }
 }
 
-@keyframes height-deploy{
-    to{
-        height: 20dvh;
+/*footer section*/
+.container > footer{
+    width: 100%;
+    background-color: var(--quinary);
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(min(100%,500px),1fr));
+    grid-auto-rows: minmax(200px,5dvh);
+    gap: 20px; 
+    box-sizing: border-box;
+    grid-area: footer;
+}
+
+.ubication{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+
+    & h3{
+        min-width: 250px;
+        flex-basis: 40%;
+        color: var(--secundary);
+        text-shadow: 2px 1px 1px var(--black);
+    }
+
+    & iframe{
+        min-width: 250px;
+        flex-basis: 60%;
+        height: 100%;
+        border-radius: 10px;
     }
 }
 
-@keyframes scale {
+/* animation area */
+@keyframes scale-img {
     0%{
         scale: .8;
     }
@@ -182,132 +322,55 @@ header{
     }
 }
 
-/** main section **/
-
-main{
-    width: 100%;
-    background-color: var(--white);
-    padding-top: 130dvh;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-}
-
-.card .card-content .card-content-button{
-    display: none;
-}
-.card:nth-child(even){
-    width: 90%;
-    height: 60dvh;
-    margin-inline:auto ;
-    background-color: var(--white);
-
-    & .card-title{
-        width: 100%;
-        height: 20%;
-        text-align: center;
-        color: var(--quinary);
-    }
-
-    & .card-content{
-        width: 100%;
-        height: 80%;
+@keyframes fixear{
+    100%{
         
-        & .card-content-images{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            overflow: hidden;
-
-            & img{
-                flex-basis: 60%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            & .card-content-images-cols{
-                flex-basis: 40%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                & img{
-                    height: 50%;
-                    width: 100%;
-                }
-            }
-
-        }
+        height: 10dvh;
+        z-index: 10;
     }
 }
 
-.card:nth-child(odd){
-    width: 90%;
-    height: 60dvh;
-    margin-inline:auto ;
-    background-color: var(--white);
-
-    & .card-title{
-        width: 100%;
-        height: 20%;
-        text-align: center;
-        color: var(--quaternary);
+@keyframes navbar {
+    90%{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 90% 10%;
+        grid-template-areas: 
+            "imagen-portada"
+            "social-medias"
+        ;
     }
-
-    & .card-content{
-        width: 100%;
-        height: 80%;
-        
-        & .card-content-images{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            overflow: hidden;
-            flex-direction: row-reverse;
-
-            & img{
-                flex-basis: 60%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            & .card-content-images-cols{
-                flex-basis: 40%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                & img{
-                    height: 50%;
-                    width: 100%;
-                }
-            }
-
-        }
+    100%{
+        grid-template-columns: 1fr 2fr 1fr 1fr;
+        grid-template-rows: 100%;
+        grid-template-areas: 
+            "logo social-medias social-medias social-medias"
+        ;
     }
 }
 
-/**footer section**/
-
-footer{
-    width: 100%;
-    background-color: var(--white);
-    margin-top: 10dvh;
-    display: flex;
-    column-gap: 20px;
+@keyframes cant-see {
+    0%{
+        display: block;
+    }
+    90%{
+        display: none;
+    }
+    100%{
+        display: none;
+    }
 }
 
-.ubication{
-    width: 90%;
-    padding: 1rem;
-    flex-basis:100%;
-    display:  flex;
-    background-color: var(--quinary);
-    justify-content: space-around;
-    border-radius: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-    
-    & iframe{
-        flex-basis: 50%;
-        border-radius: 10px;
+@keyframes can-see {
+    0%{
+        display: none;
+    }
+    99%{
+        display: none;
+    }
+    100%{
+        display: flex;
+        grid-area: logo;
+        opacity: 1;
     }
 }
